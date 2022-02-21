@@ -1,5 +1,36 @@
 """ Map leader to space ---------------------
 let mapleader=" "
+
+sethandler <C-2> a:ide
+sethandler <C-;> a:vim
+sethandler <C-S-;> a:vim
+sethandler <C-A> i:vim n-v:ide
+sethandler <C-B> i:vim n-v:ide
+sethandler <C-C> a:ide
+sethandler <C-D> a:ide
+sethandler <C-E> a:vim
+sethandler <C-F> a:vim
+sethandler <C-G> a:vim
+sethandler <C-H> a:vim
+sethandler <C-I> a:ide
+sethandler <C-J> n:vim i-v:ide
+sethandler <C-K> n:vim i-v:ide
+sethandler <C-L> a:ide
+sethandler <C-M> a:vim
+sethandler <C-N> a:vim
+sethandler <C-O> a:vim
+sethandler <C-P> a:vim
+sethandler <C-Q> a:ide
+sethandler <C-R> a:vim
+sethandler <C-S> a:ide
+sethandler <C-T> a:vim
+sethandler <C-U> a:vim
+sethandler <C-V> a:vim
+sethandler <C-W> a:vim
+sethandler <C-X> a:ide
+sethandler <C-Y> a:ide
+sethandler <C-[> a:vim
+sethandler <C-]> a:vim
 " gcc注释一行
 " gcap注释一段
 " gc + 运动 注释运动的范围
@@ -45,7 +76,15 @@ set showmode
 set so=5
 set incsearch
 set nu
-
+"语法高亮
+syntax on
+"显示行号
+set number relativenumber
+"显示光标所在位置的行号和列号
+"set ruler
+" 为IdeaVim插件增加自动切换为英文输入法的功能,
+" idea 需要安装 IdeaVimExtension plugin
+set keep-english-in-normal
 """ Idea specific settings ------------------
 set ideajoin
 set ideastatusicon=gray
@@ -68,9 +107,9 @@ map <S-Space> <Action>(GotoNextError)
 map <leader>b <Action>(ToggleLineBreakpoint)
 map <leader>o <Action>(FileStructurePopup)
 " 设置debug为 zd
-:nnoremap zd :action Debug<CR>
+nnoremap zd :action Debug<CR>
 " 设置run 为 zr
-:nnoremap zr :action Run<CR>
+nnoremap zr :action Run<CR>
 " 相对当前行行数显示
 
 " set relativenumber
@@ -82,7 +121,6 @@ set clipboard=unnamed
 " (清除高亮)
 nnoremap <leader>sc :nohlsearch<CR>
 nnoremap tt :NERDTree<CR>
-inoremap <C-a> :NERDTree<CR>
 nnoremap <leader>w :w<CR>
 
 
@@ -95,6 +133,15 @@ nnoremap <leader>Q  :qa!<CR>
 " (上下翻页)
 nnoremap <leader>d  <C-d>
 nnoremap <leader>u  <C-u>
+
+" Insert mode shortcut
+inoremap <C-b> <Left>
+inoremap <C-n> <Down>
+inoremap <C-p> <Up>
+inoremap <C-f> <Right>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+" inoremap <C-d> <Delete>
 
 " 快速进入vim模式
 inoremap jj <Esc>
@@ -207,10 +254,10 @@ nnoremap <leader>br :action ViewBreakpoints<CR>
 nnoremap <leader>cd :action ChooseDebugConfiguration<CR>
 
 "跳转到Action
-nnoremap <leader>ga :action GotoAction<CR>
+nnoremap ga :action GotoAction<CR>
 
 "跳转到实体类
-nnoremap <leader>gc :action GotoClass<CR>
+"nnoremap <leader>gc :action GotoClass<CR>
 
 "跳转到声明
 "nnoremap <leader>gd :action GotoDeclaration<CR>
@@ -218,13 +265,13 @@ nnoremap <leader>gc :action GotoClass<CR>
 nnoremap [[ :action MethodUp<CR>
 nnoremap ]] :action MethodDown<CR>
 "跳转到文件
-nnoremap <leader>gf :action GotoFile<CR>
+nnoremap gf :action GotoFile<CR>
 
 "跳转到实现类
-nnoremap <leader>gi :action GotoImplementation<CR>
+nnoremap gi :action GotoImplementation<CR>
 
 "跳转到测试类(没有则自动建立)
-nnoremap <leader>gt :action GotoTest<CR>
+nnoremap gt :action GotoTest<CR>
 
 "显示当前文件路径
 nnoremap <leader>fp :action ShowFilePath<CR>
@@ -281,8 +328,9 @@ nnoremap <leader>ss :action SingleFileExecutionAction<CR>
 nnoremap <leader>cc :action CPP.NewCppFile<CR>
 
 nnoremap <leader>lg :action ActivateVersionControlToolWindow<CR>
-nnoremap <leader>sd :action ToggleLineBreakpoint<CR>
 nnoremap + :action GotoNextError<CR>
 nnoremap - :action GotoPreviousError<CR>
 nnoremap [g :action VcsShowNextChangeMarker<CR>
 nnoremap ]g :action VcsShowPrevChangeMarker<CR>
+"通过 .ideavimrc 配置冲突键
+

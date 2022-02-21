@@ -1,0 +1,26 @@
+{
+	"name": "Vimium C",
+	"@time": "2022/2/21 下午4:47:07",
+	"time": 1645433227594,
+	"environment": {
+		"extension": "1.96.6",
+		"platform": "win",
+		"chrome": "97"
+	},
+	"keyMappings": [
+		"#!no-check",
+		"map cb createTab url=\"https://www.bilibili.com/\"",
+		"map O Vomnibar.activate",
+		"map o Vomnibar.activateInNewTab",
+		"map b Vomnibar.activateBookmarksInNewTab",
+		"map B Vomnibar.activate",
+		"map h previousTab",
+		"map l nextTab",
+		"map <c-j> goBack",
+		"map <c-k> goForward",
+		"mapKey <c-g> <esc>",
+		""
+	],
+	"linkHintCharacters": "asdfjkl;",
+	"vimSync": true
+}
