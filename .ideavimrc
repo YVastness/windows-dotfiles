@@ -1,15 +1,26 @@
-""" Map leader to space ---------------------
+" ██╗██████╗ ███████╗ █████╗ ██╗   ██╗██╗███╗   ███╗
+" ██║██╔══██╗██╔════╝██╔══██╗██║   ██║██║████╗ ████║
+" ██║██║  ██║█████╗  ███████║██║   ██║██║██╔████╔██║
+" ██║██║  ██║██╔══╝  ██╔══██║╚██╗ ██╔╝██║██║╚██╔╝██║
+" ██║██████╔╝███████╗██║  ██║ ╚████╔╝ ██║██║ ╚═╝ ██║
+" ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
+" ==================================================
+" 设置 leader 键
+" ==================================================
 let mapleader=" "
 
+" ==================================================
+" 设置 ide 和 vim 对快捷键的操作权(i, n, v, a)
+" ==================================================
 sethandler <C-2> a:ide
 sethandler <C-;> a:vim
 sethandler <C-S-;> a:vim
 sethandler <C-A> i:vim n-v:ide
 sethandler <C-B> i:vim n-v:ide
 sethandler <C-C> a:ide
-sethandler <C-D> a:ide
+sethandler <C-D> n:vim i-v:ide
 sethandler <C-E> a:vim
-sethandler <C-F> a:vim
+sethandler <C-F> i:vim n-v:ide
 sethandler <C-G> a:vim
 sethandler <C-H> a:vim
 sethandler <C-I> a:ide
@@ -17,9 +28,9 @@ sethandler <C-J> n:vim i-v:ide
 sethandler <C-K> n:vim i-v:ide
 sethandler <C-L> a:ide
 sethandler <C-M> a:vim
-sethandler <C-N> a:vim
+sethandler <C-N> i:vim n-v:ide
 sethandler <C-O> a:vim
-sethandler <C-P> a:vim
+sethandler <C-P> i:vim n-v:ide
 sethandler <C-Q> a:ide
 sethandler <C-R> a:vim
 sethandler <C-S> a:ide
@@ -31,8 +42,8 @@ sethandler <C-X> a:ide
 sethandler <C-Y> a:ide
 sethandler <C-[> a:vim
 sethandler <C-]> a:vim
-" gcc注释一行
-" gcap注释一段
+" gcc 注释一行
+" gcap 注释一段
 " gc + 运动 注释运动的范围
 
 "用法
@@ -54,7 +65,7 @@ sethandler <C-]> a:vim
 "像cx，但用于可视模式。
 "cxc
 "清除任何等待交换的{motion}。
-""" "Plugins  --------------------------------
+""" Plugins  -------------------------------
 set surround
 set multiple-cursors
 set commentary
@@ -76,23 +87,14 @@ set showmode
 set so=5
 set incsearch
 set nu
-"语法高亮
-syntax on
-"显示行号
-set number relativenumber
-"显示光标所在位置的行号和列号
-"set ruler
-" 为IdeaVim插件增加自动切换为英文输入法的功能,
-" idea 需要安装 IdeaVimExtension plugin
-set keep-english-in-normal
 """ Idea specific settings ------------------
 set ideajoin
 set ideastatusicon=gray
 set idearefactormode=keep
 
 """ Mappings --------------------------------
-map <leader>f <Plug>(easymotion-s)
-map <leader>e <Plug>(easymotion-f)
+map <leader><leader>s <Plug>(easymotion-s)
+map <leader>f <Plug>(easymotion-f)
 
 map <leader>d <Action>(Debug)
 map <leader>r <Action>(RenameElement)
@@ -103,9 +105,12 @@ map <leader>s <Action>(SelectInProjectView)
 map <leader>a <Action>(Annotate)
 map <leader>h <Action>(Vcs.ShowTabbedFileHistory)
 map <S-Space> <Action>(GotoNextError)
-
+vnoremap <Leader>tl y<CR>:action ActivateTerminalToolWindow<CR>
 map <leader>b <Action>(ToggleLineBreakpoint)
 map <leader>o <Action>(FileStructurePopup)
+map g; <Action>(JumpToLastChange)
+map g, <Action>(JumpToNextChange)
+
 " 设置debug为 zd
 nnoremap zd :action Debug<CR>
 " 设置run 为 zr
@@ -157,6 +162,7 @@ nnoremap U <C-r>
 " 以下是一些vim使用方法 -----------------
 " viw  vaw  ciw caw diw daw vi' va' ci' ca' di' da' vi( va( ci( ca( di( da( ...
 
+" ###### vim宏：normal模式下 qr 带表给r标记宏 然后vim操作。  @r 重复一次宏 10@r重复10次宏 注意（idea的提示功能干扰，可以在字符串里面先写好然后在复制黏贴）
 " ###### vim宏：normal模式下 qr 带表给r标记宏 然后vim操作。  @r 重复一次宏 10@r重复10次宏 注意（idea的提示功能干扰，可以在字符串里面先写好然后在复制黏贴）
 
 " ###### 7.2 替换
@@ -264,6 +270,7 @@ nnoremap ga :action GotoAction<CR>
 
 nnoremap [[ :action MethodUp<CR>
 nnoremap ]] :action MethodDown<CR>
+nnoremap <A-j> :action HideActiveWindow<CR>
 "跳转到文件
 nnoremap gf :action GotoFile<CR>
 
@@ -326,6 +333,7 @@ nnoremap <leader>rd :action Debug<CR>
 "单个文件
 nnoremap <leader>ss :action SingleFileExecutionAction<CR>
 nnoremap <leader>cc :action CPP.NewCppFile<CR>
+nnoremap <leader>jj :action NewClass<CR>
 
 nnoremap <leader>lg :action ActivateVersionControlToolWindow<CR>
 nnoremap + :action GotoNextError<CR>
@@ -333,4 +341,7 @@ nnoremap - :action GotoPreviousError<CR>
 nnoremap [g :action VcsShowNextChangeMarker<CR>
 nnoremap ]g :action VcsShowPrevChangeMarker<CR>
 "通过 .ideavimrc 配置冲突键
+
+let g:multi_cursor_start_key           = 'gk'
+"           有一种比替换更灵活的方式，它是匹配到某个模式后执行某种命令，
 

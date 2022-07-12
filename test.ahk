@@ -24,5 +24,25 @@ Return
 ;输入字符
 ::qq::1916286435@qq.com
 ::ph::17806190378
-$CapsLock::Enter ;将少用的caps Lock键映射为Enter键（这样可以用左手回车）replace CapsLock to LeftEnter; CapsLock = Alt CapsLock
+::id::371329199902231815
+CapsLock & `;::esc
+;上下左右
+CapsLock & h::
+	Send {Left}
+return
+
+CapsLock & l::
+	Send {Right}
+return
+
+CapsLock & k:: 
+	Send {Up} 
+return
+
+CapsLock & j::
+	Send {Down}
+return
+
+CapsLock::Send, {Enter}
 LAlt & Capslock::SetCapsLockState, % GetKeyState("CapsLock", "T") ? "Off" : "On"
+/* CapsLock::Ctrl ;将少用的caps Lock键映射为Enter键（这样可以用左手回车）replace CapsLock to LeftEnter; CapsLock = Alt CapsLock */
